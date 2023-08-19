@@ -3,7 +3,7 @@ package utils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class GenerateBearerToken extends ConfigReader{
+public class GenerateBearerToken extends TestBase{
 
     public static String TOKEN = "";
 
@@ -13,7 +13,7 @@ public class GenerateBearerToken extends ConfigReader{
         Response response = RestAssured.given()
                             .header("Content-Type","application/json")
                             .body(body)
-                            .post(baseURL+generateTokenURL);
+                            .post(BASE_URL+GENERATE_TOKEN_URL);
 
         TOKEN = response.jsonPath().get("token");
         return TOKEN;

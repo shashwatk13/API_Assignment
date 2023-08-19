@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <listeners>
+        <listener class-name="utils.Listeners"/>
+    </listeners>
+    <test verbose="2" name="\API_Automation">
+        <classes>
+            <class name="tests.Test_Booker">
+                <methods>
+                    <include name="createBooking"/>
+                    <include name="getBooking"/>
+                    <include name="updateBooking"/>
+                    <include name="deleteBooking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

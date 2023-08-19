@@ -1,25 +1,25 @@
-package tests;
+package utils;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.annotations.Test;
 
-public class RestAPIMethods {
+public class API_Helper extends TestBase{
 
     //Request Specification
-    public static RequestSpecification requestSpecification()
+    public static RequestSpecification setRequestSpecification()
     {
         RequestSpecification reqspec = new RequestSpecBuilder().setRelaxedHTTPSValidation()
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")
+                .setBaseUri(BASE_URL)
                 .build();
         return reqspec;
     }
 
     //Post Method
-    public static Response post(String url,RequestSpecification reqspec,String postBody){
+    public static Response postRequest(String url,RequestSpecification reqspec,String postBody){
         Response response = RestAssured.given()
                 .spec(reqspec)
                 .body(postBody)
@@ -28,13 +28,15 @@ public class RestAPIMethods {
     }
 
     //Get Method
-    public static Response get(String url){
-        Response response = RestAssured.given().get(url);
+    public static Response getRequest(String url,RequestSpecification reqspec){
+        Response response = RestAssured.given()
+                .spec(reqspec)
+                .get(url);
         return response;
     }
 
     //Put Method
-    public static Response put(String accessToken,String url,RequestSpecification reqspec,String putBody){
+    public static Response putRequest(String accessToken,String url,RequestSpecification reqspec,String putBody){
         Response response = RestAssured.given()
                 .spec(reqspec)
                 .header("Cookie", "token="+accessToken)
@@ -44,7 +46,7 @@ public class RestAPIMethods {
     }
 
     //Delete Method
-    public static Response delete(String accessToken,String url,RequestSpecification reqspec){
+    public static Response deleteRequest(String accessToken,String url,RequestSpecification reqspec){
         Response response = RestAssured.given()
                 .spec(reqspec)
                 .header("Cookie", "token="+accessToken)

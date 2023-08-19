@@ -26,7 +26,6 @@ public class JsonReader {
         }
     }
 
-    @Test
     public static String jsonDataParse(String jsonFileName)
     {
         readFilePath(jsonFileName);
